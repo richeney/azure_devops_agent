@@ -9,9 +9,21 @@ ENV TARGETARCH="linux-x64"
 # configure apt to not require confirmation (assume the -y argument by default)
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
-RUN apt update
-RUN apt upgrade -y
-RUN apt install -y ca-certificates curl git jq iputils-ping libicu70 libcurl4 libunwind8 netcat ruby unzip dnsutils
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    git \
+    jq \
+    iputils-ping \
+    libicu70 \
+    libcurl4 \
+    libunwind8 \
+    netcat \
+    ruby \
+    unzip \
+    dnsutils
 
 # Install Azure CLI
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
