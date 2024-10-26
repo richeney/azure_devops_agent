@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/powershell:lts-ubuntu-22.04
 # FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
 ENV TARGETARCH="linux-x64"
 # Also can be "linux-arm", "linux-arm64".
 
@@ -11,7 +10,7 @@ RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y --no-install-recommends \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     git \
